@@ -21,23 +21,24 @@ class Clock {
       // Use console.log to print it.
     }
   
-    _tick() {
+   _tick() {
         this.secs++;
-        if(this.secs >= 60) {
+        if(this.secs === 60) {
             this.secs = 0;
             this.mins++;
-            if(this.mins >= 60){
+        }
+            if(this.mins === 60){
                 this.hours++;
                 this.mins = 0;
-                if(this.hours >= 24){
+            }
+                if(this.hours === 24){
                     this.hours = 0;
                 }
-            }
-        }
+            
         this.printTime();
       // 1. Increment the time by one second.
       // 2. Call printTime.
-    }
+  }
 }
   
   // const clock = new Clock();
@@ -71,15 +72,21 @@ class Clock {
 
 }
 
-  addNumbers(0, 3, sum => console.log(`Total Sum: ${sum}`)) // 3 numbers, partial sum, total sum
+  //addNumbers(0, 3, sum => console.log(`Total Sum: ${sum}`)) // 3 numbers, partial sum, total sum
 
 
 // myBind //
 
-Function.prototype.myBind = function(context) {
+/*Function.prototype.myBind = function(context) {
   return () => {this.apply(context, [])}
+};*/
+Function.prototype.myBind = function(context) {
+  const that = this;
+  return function(...args) {
+    that.apply(context, args);
+    //that.call(context, ...args);
+  }
 };
-
 
 class Lamp {
   constructor() {
